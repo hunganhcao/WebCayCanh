@@ -39,8 +39,8 @@
                         <div class="top-header-content d-flex align-items-center justify-content-between">
                             <!-- Top Header Content -->
                             <div class="top-header-meta">
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="infodeercreative@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: infodeercreative@gmail.com</span></a>
-                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="+1 234 122 122"><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: +1 234 122 122</span></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="hunganh03102002@gmail.com"><i class="fa fa-envelope-o" aria-hidden="true"></i> <span>Email: hunganh03102002@gmail.com"</span></a>
+                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="0975598573"><i class="fa fa-phone" aria-hidden="true"></i> <span>Call Us: 0975598573</span></a>
                             </div>
 
                             <!-- Top Header Content -->
@@ -65,7 +65,7 @@
                                 </div>
                                 <!-- Cart -->
                                 <div class="cart">
-                                    <a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart <span class="cart-quantity">(1)</span></span></a>
+                                    <a asp-controller="Home" asp-action="ShoppingCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Cart <span class="cart-quantity"></span></span></a>
                                 </div>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                     <nav class="classy-navbar justify-content-between" id="alazeaNav">
 
                         <!-- Nav Brand -->
-                        <a href="index.html" class="nav-brand"><img src="../Tree_template/img/core-img/logo.png" alt=""></a>
+                        <a asp-controller="Home" asp-action="Index" class="nav-brand"><img src="../Tree_template/img/core-img/logo.png" alt=""></a>
 
                         <!-- Navbar Toggler -->
                         <div class="classy-navbar-toggler">
@@ -100,36 +100,10 @@
                             <!-- Navbar Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                                     <li><a href="about.html">About</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="about.html">About</a></li>
-                                            <li><a href="shop.html">Shop</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="shop.html">Shop</a></li>
-                                                    <li><a href="shop-details.html">Shop Details</a></li>
-                                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="portfolio.html">Portfolio</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="portfolio.html">Portfolio</a></li>
-                                                    <li><a href="single-portfolio.html">Portfolio Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="blog.html">Blog</a>
-                                                <ul class="dropdown">
-                                                    <li><a href="blog.html">Blog</a></li>
-                                                    <li><a href="single-post.html">Blog Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="contact.html">Contact</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="shop.html">Shop</a></li>
+                                    
+                                    <li><a asp-controller="Home" asp-action="SPMenu">Shop</a></li>
                                     <li><a href="portfolio.html">Portfolio</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
@@ -418,6 +392,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         }
     })
     function checkOut() {
+
         $.ajax({
             url: `https://localhost:7038/api/checkout`,
             type: "POST",
@@ -435,5 +410,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 console.log("you might need login first");
             }
         });
+        window.location.reload();
     }
 </script>

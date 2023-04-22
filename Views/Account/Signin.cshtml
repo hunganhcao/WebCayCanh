@@ -39,6 +39,7 @@
                     <div class="form-group form-button">
                         <input onclick="submit()" type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
                     </div>
+                    <button onclick="home()" class="btn btn-primary">Back</button>
                 </div>
                 <div class="social-login">
                     <span class="social-label">Or login with</span>
@@ -60,10 +61,13 @@
                         </li>
                     </ul>
                 </div>
+                
             </div>
         </div>
+        
+                  
     </div>
-    <a asp-controller="Home" asp-action="Index" id="return-home" style="display: none"></a>
+    
 </section>
 
 <script>
@@ -99,13 +103,16 @@
                     // })
                     document.location.assign(`https://localhost:7038/admin?token=${getCookie("token")}`)
                 } else {
-                    document.getElementById("return-home").click();
+                    history.back();
                 }
             },
             error: function () {
                 $("#loader_container").css("display", "none");
                 alert("incorrect username or password");
             }
-        })
-    }
+        });
+    };
+     function home() {
+        history.back();
+    };
 </script>

@@ -152,9 +152,15 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-12">
+                                            <button onclick="home()" class="btn btn-primary">Back</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
                                             <button onclick="logout()" style="background: #BB1F24; border: none" class="btn btn-success">Log out</button>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -210,6 +216,9 @@
     function logout() {
         deleteAllCookies()
         window.location.assign('https://localhost:7038/Home');
+    }
+    function home() {
+        history.back();
     }
 
     function getCookie(name) {
