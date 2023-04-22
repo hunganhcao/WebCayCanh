@@ -1,0 +1,33 @@
+﻿@using BTThucTap.Controllers
+@model CartDetail
+@inject HomeController HomeController
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    var item = HomeController.GetProductById(Model.ProductId);
+    var containerId = "container-cart-product" + item.Id;
+}
+<tr id ="@containerId">
+        <td class="cart_product_img">
+        <a href="#"><img src="@Url.Content("../Tree_template/img/product/" + item.ImageUrl)" alt="Product"></a>
+            <h5>@item.Name</h5>
+        </td>
+        <td class="qty">
+            <div class="quantity">
+           
+            <span class="qty-minus" onclick="updatethanhtien(@item.Id,-1);var effect = document.getElementById('@Model.ProductId'); var qty = effect.value; if( !isNaN( qty ) &amp;&amp; qty > 1 ) effect.value--;Capnhat(@item.Id);updatethanhtien(@item.Id,1);return false;"><i class="fa fa-minus" aria-hidden="true"></i></span>
+            <input type="number" class=" qty-text" onchange="Capnhat(@item.Id) " id="@Model.ProductId" name="quantity" asp-for="@Model.Amount" value="@Model.Amount">
+            <span class="qty-plus" onclick="updatethanhtien(@item.Id,-1);var effect = document.getElementById('@Model.ProductId'); var qty = effect.value; if( !isNaN( qty )) effect.value++;Capnhat(@item.Id);updatethanhtien(@item.Id,1);return false;"><i class="fa fa-plus" aria-hidden="true"></i></span>
+        </div>
+        </td>
+    <td class="price" @{
+        var id2 = "price_"+ item.Id;
+        } id="@id2">
+        <span> @item.Price</span>
+    </td>
+        <td class="total_price"
+        @{ var id1 = "total_"+ item.Id;} id="@id1" >
+        @(Model.Amount * item.Price)
+    </td>
+    <td class="action"><a href="#"><i class="icon_close" onclick="remove('@containerId', @item.Id, '@id1')"></i></a></td>
+   
+</tr>

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Category>
+<div class="card">
+    
+    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="shop__sidebar__categories">
+                <ul class="nice-scroll">
+                    @foreach (var item in Model)
+                    {
+                        <li>
+                            <a asp-controller="Home" asp-action="SanPhamTheoCategory"
+                           asp-route-maloai="@item.Id">@item.Name</a>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

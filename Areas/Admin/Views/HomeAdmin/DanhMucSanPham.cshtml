@@ -1,0 +1,79 @@
+﻿@using BTThucTap.Models;
+@using X.PagedList.Mvc.Core;
+@model X.PagedList.IPagedList<Product>;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "DanhMucSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    QlbanCayContext db = new QlbanCayContext();
+}
+
+<h1>DanhMucSanPham</h1>
+
+<p>
+    <a asp-action="ThemSanPham">Create New</a>
+</p>
+<p>
+    @TempData["Message"]
+</p>
+<div class="container-fluid">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+               Price
+            </th>
+            <th>
+                CategoryId
+            </th>
+            <th>
+                ImageUrl
+            </th>
+           
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            var idsp = item.Id;
+            <tr class="table-success">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoryid)
+                 
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+           
+            <td>
+                <a asp-action="SuaSanPham" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="ChiTietSanPham" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="XoaSanPham" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+@Html.PagedListPager(Model, page => Url.Action("danhmucsanpham", new{page=page}), new
+    X.PagedList.Web.Common.PagedListRenderOptions(){
+        LiElementClasses = new List<String> {"page-item"},
+        PageClasses = new List<String> {"page-link"},
+    });

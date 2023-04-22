@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "_LayoutLogin";
+}
+
+<!-- Sing in  Form -->
+<section class="sign-in">
+    <div class="container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure>
+                    <img src="../login/images/signin-image.jpg" alt="sing up image">
+                </figure>
+                <a asp-controller="Account" asp-action="Register" class="signup-image-link">Create an account</a>
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title">Sign up</h2>
+                <div method="POST" class="register-form" id="login-form">
+                    <div class="form-group">
+                        <label for="your_email">
+                            <i class="zmdi zmdi-account material-icons-name"></i>
+                        </label>
+                        <input type="text" name="your_email" id="your_email" placeholder="Your Email" />
+                    </div>
+                    <div class="form-group">
+                        <label for="your_pass">
+                            <i class="zmdi zmdi-lock"></i>
+                        </label>
+                        <input type="password" name="your_pass" id="your_pass" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                        <label for="remember-me" class="label-agree-term">
+                            <span>
+                                <span></span>
+                            </span>Remember me
+                        </label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input onclick="submit()" type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                    </div>
+                </div>
+                <div class="social-login">
+                    <span class="social-label">Or login with</span>
+                    <ul class="socials">
+                        <li>
+                            <a href="#">
+                                <i class="display-flex-center zmdi zmdi-facebook"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="display-flex-center zmdi zmdi-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="display-flex-center zmdi zmdi-google"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a asp-controller="Home" asp-action="Index" id="return-home" style="display: none"></a>
+</section>
+
+<script>
+    function submit() {
+        $("#loader_container").css("display", "flex");
+        let data = {
+            email: $("#your_email").val(),
+            password: $("#your_pass").val(),
+        }
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+        $.ajax({
+            url: "https://localhost:7038/api/user/signin",
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(data),
+            async: true,
+            success: function (data) {
+                console.log(data)
+                if (data.role === 'Admin') {
+                    // $.ajax({
+                    //     url: "https://localhost:44342/admin",
+                    //     type: "GET",
+                    //     contentType: 'text/html; charset=utf-8',
+                    //     beforeSend: function (xhr) {
+                    //         xhr.setRequestHeader('Authorization', `Bearer ${getCookie("token")}`);
+                    //     },
+                    //     success: function (data) {
+                    //     }
+                    // })
+                    document.location.assign(`https://localhost:7038/admin?token=${getCookie("token")}`)
+                } else {
+                    document.getElementById("return-home").click();
+                }
+            },
+            error: function () {
+                $("#loader_container").css("display", "none");
+                alert("incorrect username or password");
+            }
+        })
+    }
+</script>

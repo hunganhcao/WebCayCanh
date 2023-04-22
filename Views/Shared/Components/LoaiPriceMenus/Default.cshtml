@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Product>
+
+<div class="card">
+    <div class="card-heading">
+        <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+    </div>
+    <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+        <div class="card-body">
+            <div class="shop__sidebar__price">
+                <form method="post" asp-controller="Home" asp-action="SearchProducts">
+                    <input type="hidden" name="price_from" value="0">
+                    <input type="hidden" name="price_to" value="50">
+                    <ul>
+                        <li>
+                            <button style="border: none; background:none" type="submit" name="price_range" value="0-2,500">0-2,500$</button>
+
+                        </li>
+                        <li>
+                            <button style="border: none; background:none" type="submit" name="price_range" value="2,500-5,000">2,500-5,000$</button>
+
+                        </li>
+                        <li>
+                            <button style="border: none; background:none" type="submit" name="price_range" value="5,000-10,000">5,000-10,000$</button>
+
+                        </li>
+                        <li>
+                            <button style="border: none; background:none" type="submit" name="price_range" value="10,000-100,000">10,000-100,000$</button>
+
+                        </li>
+                        <!-- Other links here -->
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_LayoutHome";
+}
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<Product>
+
+@foreach (var item in Model)
+{
+    @await Html.PartialAsync("partialSP",item)
+}
+<script>
+    function gotoDetails(id) {
+        document.location.assign(`https://localhost:7038/Home/ChiTietSanPham?maSp=${id}`)
+    }
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function addToCart(id) {
+        $.ajax({
+            url: `https://localhost:7038/api/add-to-cart?id=${id}`,
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${getCookie("token")}`);
+            },
+            async: true,
+            success: function (data) {
+                alert("successfully added to cart");
+                console.log(data)
+            },
+            error: function (error) {
+                alert("add to cart failed, you should login first");
+                console.log("you might need login first");
+            }
+        });
+    }
+</script>

@@ -1,0 +1,76 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_LayoutCart.cshtml";
+}
+@model List<CartDetail>
+<tbody>
+    @foreach (var item in Model)
+    {
+        await Html.RenderPartialAsync("CartItem", item);
+    }
+</tbody>
+
+<script>
+   function Capnhat(id) {
+       console.log(id)
+        let amount = parseFloat(document.getElementById(id).value)
+        let price = parseFloat(document.getElementById("price_" + id).textContent.replace(/,/, '.'))
+        
+        console.log(price)
+        let tota=document.getElementById("total_"+id)
+        tota.textContent = `${(price * amount).toFixed(2)}`
+        update(amount, id, price)
+     
+    }
+    function updatethanhtien(id,version) {
+        let total = document.getElementById("super-total")
+        let amount = parseFloat(document.getElementById(id).value)
+        let price = parseFloat(document.getElementById("price_" + id).textContent.replace(/,/, '.')).toFixed(2)
+        console.log(price)
+        if (amount > 0) {
+            total.textContent = "$ " + (parseFloat(total.textContent.split("$")[1].trim()) + amount * price * version).toFixed(2).toString()
+        }
+        else(
+            total.textContent = "$ " + (parseFloat(total.textContent.split("$")[1].trim()) - parseFloat(price * amount)).toFixed(2).toString()
+        )
+        
+    }  
+    function remove(id, productId, priceId) {
+        let total = parseFloat(document.getElementById(priceId).textContent)
+        console.log(document.getElementById(priceId))
+        console.log(total)
+        update(-1, productId, -total)
+        document.getElementById(id).remove()
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+
+    function update(amount, id, price) {
+
+        let total = document.getElementById("super-total")
+        console.log(amount)
+        if (amount <= 0) {
+            total.textContent = "$ " + (parseFloat(total.textContent.split("$")[1].trim()) - parseFloat(price * amount)).toFixed(2).toString()
+        } 
+
+        $.ajax({
+            url: `https://localhost:7038/api/cart/update?amount=${amount}&productId=${id}`,
+            type: "PUT",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${getCookie("token")}`);
+            },
+            async: true,
+            success: function (data) {
+                console.log("data updated")
+            },
+            error: function () {
+                console.error("error update data")
+            }
+        })
+    }
+</script>

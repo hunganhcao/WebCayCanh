@@ -1,0 +1,51 @@
+﻿@model Product
+<div class="col-12 col-sm-6 col-lg-4">
+    <div class="single-product-area mb-50 wow fadeInUp" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
+        <!-- Product Image -->
+        <div class="product-img">
+            <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-maSp="@Model.Id"><img src="@Url.Content("../Tree_template/img/product/"+@Model.ImageUrl)" alt="" style="width:255px; height:255px"></a>
+            <div class="product-meta d-flex">
+                <a href="#" class="wishlist-btn"><i class="icon_heart_alt"></i></a>
+                <a href="#" style="cursor: pointer" onclick="addToCart('@Model.Id')" class="add-to-cart-btn">Add to cart</a>
+                <a href="#" class="compare-btn"><i class="arrow_left-right_alt"></i></a>
+            </div>
+        </div>
+        <!-- Product Info -->
+        <div class="product-info mt-15 text-center">
+            <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-maSp="@Model.Id">
+                <p>@Model.Name</p>
+            </a>
+            <h6>@Model.Price</h6>
+        </div>
+    </div>
+</div>
+
+<script>
+    function gotoDetails(id) {
+        document.location.assign(`https://localhost:7038/Home/ChiTietSanPham?maSp=${id}`)
+    }
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+    function addToCart(id) {
+        $.ajax({
+            url: `https://localhost:44342/api/add-to-cart?id=${id}`,
+            type: "POST",
+            contentType: 'application/json; charset=utf-8',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', `Bearer ${getCookie("token")}`);
+            },
+            async: true,
+            success: function (data) {
+                alert("successfully added to cart");
+                console.log(data)
+            },
+            error: function (error) {
+                alert("add to cart failed, you should login first");
+                console.log("you might need login first");
+            }
+        });
+    }
+</script>
