@@ -90,7 +90,17 @@
     }
 
     // :: 6.0 magnificPopup Active Code
-   
+    if ($.fn.magnificPopup) {
+        $('.portfolio-img').magnificPopup({
+            gallery: {
+                enabled: true
+            },
+            type: 'image'
+        });
+        $('.video-icon').magnificPopup({
+            type: 'iframe'
+        });
+    }
 
     // :: 7.0 Barfiller Active Code
     if ($.fn.barfiller) {

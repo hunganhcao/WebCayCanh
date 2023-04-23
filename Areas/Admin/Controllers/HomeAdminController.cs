@@ -69,8 +69,13 @@ namespace BTThucTap.Areas.Admin.Controllers
             [Route("danhmucsanpham")]
             public IActionResult DanhMucSanPham(int? page)
             {
-                
-                int pageSize = 6;
+            var securityToken = new JwtSecurityToken(Request.Cookies["token"]);
+            var data = securityToken.Claims.First(c => c.Type == ClaimTypes.UserData).Value;
+            Customer customer = Newtonsoft.Json.JsonConvert.DeserializeObject<Customer>(data);
+            customer = db.Customers.First(c => c.Id == customer.Id);
+            if (customer.Role == "User") return Unauthorized();
+
+            int pageSize = 6;
                 int pageNumber = page == null || page < 0 ? 1 : page.Value;
                 var lstSanPham = db.Products.AsNoTracking().OrderBy(x => x.Id);
                
@@ -81,6 +86,11 @@ namespace BTThucTap.Areas.Admin.Controllers
         [Route("danhmuchoadon")]
         public IActionResult DanhMucHoaDon(int? page)
         {
+            var securityToken = new JwtSecurityToken(Request.Cookies["token"]);
+            var data = securityToken.Claims.First(c => c.Type == ClaimTypes.UserData).Value;
+            Customer customer = Newtonsoft.Json.JsonConvert.DeserializeObject<Customer>(data);
+            customer = db.Customers.First(c => c.Id == customer.Id);
+            if (customer.Role == "User") return Unauthorized();
 
             int pageSize = 6;
             int pageNumber = page == null || page < 0 ? 1 : page.Value;
@@ -95,7 +105,12 @@ namespace BTThucTap.Areas.Admin.Controllers
         [Route("DanhSachNhanVien")]
             public IActionResult DanhSachNhanVien(int? page)
             {
-                var lstNhanVien = db.Staff.ToList();
+            var securityToken = new JwtSecurityToken(Request.Cookies["token"]);
+            var data = securityToken.Claims.First(c => c.Type == ClaimTypes.UserData).Value;
+            Customer customer = Newtonsoft.Json.JsonConvert.DeserializeObject<Customer>(data);
+            customer = db.Customers.First(c => c.Id == customer.Id);
+            if (customer.Role == "User") return Unauthorized();
+            var lstNhanVien = db.Staff.ToList();
 
                 return View(lstNhanVien);
             }
@@ -104,6 +119,11 @@ namespace BTThucTap.Areas.Admin.Controllers
             [HttpGet]
             public IActionResult ThemSanPham()
             {
+            var securityToken = new JwtSecurityToken(Request.Cookies["token"]);
+            var data = securityToken.Claims.First(c => c.Type == ClaimTypes.UserData).Value;
+            Customer customer = Newtonsoft.Json.JsonConvert.DeserializeObject<Customer>(data);
+            customer = db.Customers.First(c => c.Id == customer.Id);
+            if (customer.Role == "User") return Unauthorized();
             ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "Name");
             ViewBag.ManufacturerId = new SelectList(db.Manufacturers.ToList(), "Id", "Name");
             Product product = new Product();
@@ -131,7 +151,12 @@ namespace BTThucTap.Areas.Admin.Controllers
             [HttpGet]
             public IActionResult SuaSanPham(int id)
             {
-                ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "Name");
+            var securityToken = new JwtSecurityToken(Request.Cookies["token"]);
+            var data = securityToken.Claims.First(c => c.Type == ClaimTypes.UserData).Value;
+            Customer customer = Newtonsoft.Json.JsonConvert.DeserializeObject<Customer>(data);
+            customer = db.Customers.First(c => c.Id == customer.Id);
+            if (customer.Role == "User") return Unauthorized();
+            ViewBag.CategoryId = new SelectList(db.Categories.ToList(), "Id", "Name");
                 ViewBag.ManufacturerId = new SelectList(db.Manufacturers.ToList(), "Id", "Name");
                 Product product = db.Products.Where(a => a.Id == id).FirstOrDefault();
                 return View(product);
@@ -195,7 +220,12 @@ namespace BTThucTap.Areas.Admin.Controllers
             [HttpGet]
             public IActionResult ChiTietSanPham(int id)
             {
-                Product product = db.Products
+            var securityToken = new JwtSecurityToken(Request.Cookies["token"]);
+            var data = securityToken.Claims.First(c => c.Type == ClaimTypes.UserData).Value;
+            Customer customer = Newtonsoft.Json.JsonConvert.DeserializeObject<Customer>(data);
+            customer = db.Customers.First(c => c.Id == customer.Id);
+            if (customer.Role == "User") return Unauthorized();
+            Product product = db.Products
                     .Where(a => a.Id == id)
                     .FirstOrDefault();
                 return View(product);
@@ -204,7 +234,12 @@ namespace BTThucTap.Areas.Admin.Controllers
             [HttpGet]
             public IActionResult ChiTietHoaDon(int id)
             {
-                var hoadon = db.SellReceiptDetails.Where(a=>a.SellReceiptId==id).ToList();
+            var securityToken = new JwtSecurityToken(Request.Cookies["token"]);
+            var data = securityToken.Claims.First(c => c.Type == ClaimTypes.UserData).Value;
+            Customer customer = Newtonsoft.Json.JsonConvert.DeserializeObject<Customer>(data);
+            customer = db.Customers.First(c => c.Id == customer.Id);
+            if (customer.Role == "User") return Unauthorized();
+            var hoadon = db.SellReceiptDetails.Where(a=>a.SellReceiptId==id).ToList();
                 return View(hoadon);
             }
             private async Task<bool> UploadFile(IFormFile ufile)

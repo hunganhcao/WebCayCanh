@@ -1,6 +1,6 @@
 ﻿@model Product
 <div class="col-12 col-sm-6 col-lg-3">
-    <div class="single-product-area mb-50" wow fadeInUp" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
+    <div class="single-product-area mb-50 wow fadeInUp" data-wow-delay="300ms" style="visibility: visible; animation-delay: 300ms; animation-name: fadeInUp;">
         <!-- Product Image -->
         <div class="product-img">
             <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-maSp="@Model.Id"><img src="@Url.Content("../Tree_template/img/product/"+@Model.ImageUrl)" alt="" style="width:255px; height:255px"></a>
