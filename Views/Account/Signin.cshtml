@@ -83,7 +83,7 @@
             if (parts.length === 2) return parts.pop().split(';').shift();
         }
         $.ajax({
-            url: "https://localhost:7038/api/user/signin",
+            url: "https://localhost:44394/api/user/signin",
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),
@@ -101,7 +101,7 @@
                     //     success: function (data) {
                     //     }
                     // })
-                    document.location.assign(`https://localhost:7038/admin?token=${getCookie("token")}`)
+                    document.location.assign(`https://localhost:44394/admin?token=${getCookie("token")}`)
                 } else {
                     history.back();
                 }

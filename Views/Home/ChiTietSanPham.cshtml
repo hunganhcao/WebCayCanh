@@ -46,7 +46,7 @@
                         <h4 class="title">@Model.Name</h4>
                         <h4 class="price">@Model.Price $</h4>
                         <div class="short_overview">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pellem malesuada in nibh selama euismod. Curabitur a rhoncus dui. Nunc lobortis cursus magna utrum faucibus. Vivamus justo nibh, pharetra non risus accumsan, tincidunt suscipit leo.</p>
+                            <p>@Model.Description</p>
                         </div>
 
                         <div class="cart--area d-flex flex-wrap align-items-center">
@@ -246,7 +246,7 @@
 </section>
 <script>
     function gotoDetails(id) {
-        document.location.assign(`https://localhost:7038/Home/ChiTietSanPham?maSp=${id}`)
+        document.location.assign(`https://localhost:44394/Home/ChiTietSanPham?maSp=${id}`)
     }
     function getCookie(name) {
         const value = `; ${document.cookie}`;
@@ -255,7 +255,7 @@
     }
     function addToCart(id) {
         $.ajax({
-            url: `https://localhost:7038/api/add-to-cart?id=${id}`,
+            url: `https://localhost:44394/api/add-to-cart?id=${id}`,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             beforeSend: function (xhr) {

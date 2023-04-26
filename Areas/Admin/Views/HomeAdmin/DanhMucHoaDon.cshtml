@@ -6,10 +6,10 @@
     ViewData["Title"] = "DanhMucHoaDon";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<div class="card-header bg-primary text-uppercase text-white">
 <h1>DanhMucHoaDon</h1>
-
-
+</div>
+<div class="container-fluid">
 <table class="table">
     <thead>
         <tr>
@@ -50,7 +50,8 @@
 }
     </tbody>
 </table>
-@Html.PagedListPager(Model, page => Url.Action("danhmucsanpham", new{page=page}), new
+</div>
+@Html.PagedListPager(Model, page => Url.Action("danhmuchoadon", new{page=page}), new
     X.PagedList.Web.Common.PagedListRenderOptions(){
         LiElementClasses = new List<String> {"page-item"},
         PageClasses = new List<String> {"page-link"},

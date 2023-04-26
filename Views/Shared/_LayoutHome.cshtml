@@ -105,6 +105,7 @@
                                     
                                     <li><a asp-controller="Home" asp-action="SPMenu">Shop</a></li>
                                     <li><a href="portfolio.html">Portfolio</a></li>
+                                    <li><a href="portfolio.html">Test</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                 </ul>
 
@@ -935,7 +936,7 @@
 
     function addToCart(id) {
         $.ajax({
-            url: `https://localhost:7038/api/add-to-cart?id=${id}`,
+            url: `https://localhost:44394/api/add-to-cart?id=${id}`,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             beforeSend: function (xhr) {

@@ -215,7 +215,7 @@
     }
     function logout() {
         deleteAllCookies()
-        window.location.assign('https://localhost:7038/Home');
+        window.location.assign('https://localhost:44394/Home');
     }
     function home() {
         history.back();
@@ -239,7 +239,7 @@
             address: $("#address").val(),
         }
         $.ajax({
-            url: "https://localhost:7038/api/user/update",
+            url: "https://localhost:44394/api/user/update",
             type: "PUT",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(data),

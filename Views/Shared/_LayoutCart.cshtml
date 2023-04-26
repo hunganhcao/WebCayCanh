@@ -377,7 +377,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     }
 
     $.ajax({
-        url: "https://localhost:7038/api/cart/total",
+        url: "https://localhost:44394/api/cart/total",
         type: "GET",
         contentType: 'application/json; charset=utf-8',
         beforeSend: function (xhr) {
@@ -394,7 +394,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     function checkOut() {
 
         $.ajax({
-            url: `https://localhost:7038/api/checkout`,
+            url: `https://localhost:44394/api/checkout`,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             beforeSend: function (xhr) {
@@ -410,6 +410,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 console.log("you might need login first");
             }
         });
-        window.location.reload();
     }
 </script>

@@ -17,7 +17,7 @@
 </div>
 <script>
     function gotoDetails(id) {
-        document.location.assign(`https://localhost:7038/Home/ChiTietSanPham?maSp=${id}`)
+        document.location.assign(`https://localhost:44394/Home/ChiTietSanPham?maSp=${id}`)
     }
     function getCookie(name) {
         const value = `; ${document.cookie}`;
@@ -26,7 +26,7 @@
     }
     function addToCart(id) {
         $.ajax({
-            url: `https://localhost:7038/api/add-to-cart?id=${id}`,
+            url: `https://localhost:44394/api/add-to-cart?id=${id}`,
             type: "POST",
             contentType: 'application/json; charset=utf-8',
             beforeSend: function (xhr) {

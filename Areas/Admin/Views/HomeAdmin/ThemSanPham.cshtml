@@ -4,11 +4,12 @@
     ViewData["Title"] = "ThemSanPham";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
-
+<div class="card-header bg-primary text-uppercase text-white">
 <h1>ThemSanPham</h1>
+</div>
 
-<h4>Product</h4>
 <hr />
+<div class="container-fluid">
 <div class="row">
     <div class="col-md-4">
         <form method="post" asp-action="ThemSanPham" enctype="multipart/form-data"  >
@@ -59,6 +60,7 @@
 
 <div>
     <a asp-action="Index">Back to List</a>
+</div>
 </div>
 <script type="text/javascript">
             $(".custom-file-input").on("change", function () {
